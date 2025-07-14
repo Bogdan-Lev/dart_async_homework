@@ -1,6 +1,7 @@
 void main() async {
   await runTask1();
   await runTask2();
+  await runTask3();
 }
 
 // Task 1: Асинхронне отримання імені
@@ -61,4 +62,28 @@ Future<void> runTask2() async {
   print('Мені $ageInt $yearWord');
 
   print('-------------------  End_Task_2  -------------------');
+}
+
+// Task 3: Послідовне виконання Future
+// 1.Виконайте методи fetchName() та fetchAge() послідовно.
+// 2.Виміряйте та виведіть час виконання обох методів.
+// Порада. Можете використати для виконання другого пункту клас https://api.flutter.dev/flutter/dart-core/Stopwatch-class.html
+
+Future<void> runTask3() async {
+  print('------------------- Start_Task_3 -------------------');
+
+  final stopwatch = Stopwatch()..start();
+
+  final name = await fetchName();
+  print('Мене звати $name');
+
+  final age = await fetchAge();
+  final ageInt = int.parse(age);
+  final yearWord = getYearWord(ageInt);
+  print('Мені $ageInt $yearWord');
+
+  stopwatch.stop();
+  print('Час виконання: ${stopwatch.elapsedMilliseconds} мс');
+
+  print('-------------------  End_Task_3  -------------------');
 }
