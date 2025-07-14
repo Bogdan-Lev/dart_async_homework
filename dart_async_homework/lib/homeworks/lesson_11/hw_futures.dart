@@ -2,6 +2,7 @@ void main() async {
   await runTask1();
   await runTask2();
   await runTask3();
+  await runTask4();
 }
 
 // Task 1: Асинхронне отримання імені
@@ -86,4 +87,28 @@ Future<void> runTask3() async {
   print('Час виконання: ${stopwatch.elapsedMilliseconds} мс');
 
   print('-------------------  End_Task_3  -------------------');
+}
+
+// Task 4: Паралельне виконання Future (Future.wait)
+// 1.Виконайте методи fetchName() та fetchAge() паралельно за допомогою Future.wait.
+// 2.Виміряйте та виведіть час виконання.
+
+Future<void> runTask4() async {
+  print('------------------- Start_Task_4 -------------------');
+
+  final stopwatch = Stopwatch()..start();
+
+  final results = await Future.wait([fetchName(), fetchAge()]);
+  final name = results[0];
+  final age = results[1];
+  final ageInt = int.parse(age);
+  final yearWord = getYearWord(ageInt);
+
+  print('Мене звати $name');
+  print('Мені $ageInt $yearWord');
+
+  stopwatch.stop();
+  print('Час виконання: ${stopwatch.elapsedMilliseconds} мс');
+
+  print('-------------------  End_Task_4  -------------------');
 }
